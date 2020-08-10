@@ -17,7 +17,7 @@ module.exports = {
     {
       use: '~/src/plugins/wp-source/',
       options: {
-        baseUrl: '', // required - Replace me with your Wordpress URL 
+        baseUrl: 'https://f02f63d7-fdbc-444f-873e-d8ded3d7cff7.s14.conves.io', // required - Replace me with your Wordpress URL 
         typeName: 'WordPress', // GraphQL schema name (Optional)
         perPage: 100, // How many posts to load from server per request (Optional)
         concurrent: 10, // How many requests to run simultaneously (Optional)
