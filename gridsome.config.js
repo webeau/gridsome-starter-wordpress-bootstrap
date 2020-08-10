@@ -28,7 +28,11 @@ module.exports = {
         createPages: {
           approach: 'include', // include or exclude, default is include
           list: [] //an array of page slugs to include or exclude, ex. ['about', 'our-team'], default is an empty array
-        }
+        },
+        splitPostsIntoFragments: true, // default false
+        downloadRemoteImagesFromPosts: true, // default false
+        downloadRemoteFeaturedImages: true, // default false
+        downloadACFImages: true, // default false
       }
     }
   ],
