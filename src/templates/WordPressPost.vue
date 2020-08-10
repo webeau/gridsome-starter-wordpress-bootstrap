@@ -5,7 +5,7 @@
         <h1 class="text-break" v-html="$page.post.title"/>
         <b-img
           v-if="$page.post.featuredMedia"
-          :src="$page.post.featuredMedia.sourceUrl"
+          :src="$page.post.featuredMedia.source_url"
           :width="$page.post.featuredMedia.mediaDetails.width"
           :alt="$page.post.featuredMedia.altText"
           fluid
