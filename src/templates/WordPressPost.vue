@@ -39,7 +39,7 @@ query Post($path: String!) {
     date
     content
     featuredMedia {
-      sourceUrl
+      source_url
       altText
       mediaDetails {
         width
