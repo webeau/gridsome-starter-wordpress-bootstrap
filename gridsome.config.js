@@ -11,8 +11,9 @@ function addStyleResource (rule) {
 }
 
 module.exports = {
-  siteName: 'Gridsome',
-  siteDescription: 'A WordPress starter for Gridsome',
+  siteName: 'webeau web design',
+  siteDescription: 'web design for the modern, fluid internet',
+  siteUrl: 'https//www.example.com',
   plugins: [
     {
       use: '~/src/plugins/wp-source/',
@@ -34,7 +35,139 @@ module.exports = {
         downloadRemoteFeaturedImages: true, // default false
         downloadACFImages: true, // default false
       }
-    }
+    },
+    {
+      use: 'gridsome-plugin-pwa',
+      options: {
+          // Service Worker Options
+          disableServiceWorker: false,
+          serviceWorkerPath: 'service-worker.js',
+          cachedFileTypes: 'js,json,css,html,png,jpg,jpeg,svg,gif',
+          disableTemplatedUrls: false,       // Optional
+
+          // Manifest Options (https://developer.mozilla.org/en-US/docs/Web/Manifest)
+          manifestPath: 'manifest.json',
+          title: 'Webeau Web Design',
+          startUrl: '/',
+          display: 'standalone',
+          statusBarStyle: 'default',
+          themeColor: '#666600',
+          backgroundColor: '#ffffff',
+          icon: 'favicon.png',
+          shortName: 'webeau',              // Optional
+          description: 'web design for the modern, fluid internet',// Optional
+          categories: ['education'],          // Optional
+          lang: 'en-US',                      // Optional
+          dir: 'auto',                        // Optional
+          maskableIcon: true,                 // Optional
+          screenshots: [                      // Optional
+              {
+                  src: 'src/screenshot1.png',
+                  sizes: '1280x720',
+                  type: 'image/png',
+              },
+          ],
+          gcmSenderId: undefined,             // Optional
+
+          // Standard Meta Tags
+          svgFavicon: 'favicon.svg',          // Optional. Requires favicon.ico fallback
+
+          // Microsoft Windows Meta Tags
+          msTileColor: '#666600',             // Optional
+
+          // Apple MacOS Meta Tags
+          appleMaskIcon: 'favicon.svg',       // Optional
+          appleMaskIconColor: '#666600',      // Optional
+      }
+    },
+    {
+      use: '@gridsome/plugin-critical',
+      options: {
+        paths: ['/'],
+        width: 1300,
+        height: 900
+      }
+    },
+    {
+      use: 'gridsome-plugin-svg',
+      options: {
+      // default options below
+      goesBothWays: false,
+      svgo: [
+        {
+          removeTitle: false
+        },
+        {
+          prefixIds: {
+            prefix: (_, {path}) => basename(path, '.svg'),
+            delim: '-',
+          },
+        },
+        {
+          removeDesc: false
+        },
+        {
+          removeViewBox: false,
+        },
+        {
+          sortAttrs: true,
+        }
+        ],
+      }
+    },
+    {
+      use: '@gridsome/plugin-google-analytics',
+      options: {
+        id: 'UA-18077270-1'
+      }
+    },
+    {
+      use: '@gridsome/plugin-sitemap',
+      options: {
+        exclude: ['/exclude-me'],
+        config: {
+          '/articles/*': {
+            changefreq: 'weekly',
+            priority: 0.5,
+            lastmod: '2020-02-19',
+          },
+          '/about': {
+            changefreq: 'monthly',
+            priority: 0.7,
+            lastmod: '2020-05-12',
+          }
+        }
+      }
+    },
+    {
+      use: 'gridsome-plugin-bundle-analyzer',
+      options: {
+        onlyProduction: true, // only production bundle will be analyzed by default
+        analyzerOptions: {}, // see https://github.com/webpack-contrib/webpack-bundle-analyzer
+      },
+    },
+    {
+      use: 'gridsome-plugin-robots-txt',
+      options: {
+        host: 'https://my-awesome-fast-site.com',
+        sitemap: 'https://my-awesome-fast-site.com/configs/sitemap.xml',
+        policy: [
+          {
+            userAgent: "Googlebot",
+            allow: "/",
+            disallow: "/search",
+            crawlDelay: 2
+          },
+          {
+            userAgent: "*",
+            allow: "/",
+            disallow: "/search",
+            crawlDelay: 10,
+            cleanParam: "ref /articles/"
+          }
+        ]
+      }
+    }    
   ],
   chainWebpack (config) {
     // Load variables for all vue-files
